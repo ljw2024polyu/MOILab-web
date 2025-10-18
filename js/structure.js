@@ -17,19 +17,24 @@ function loadYAMLFile(url) {
   });
 }
 
-/* --- Tiny helpers --- */
-// Render a list of {name, link} into a container
+// --- Safe HTML escape (avoid inserting raw text) ---
+function esc(s){ return String(s||"")
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+
+// Render a list of {name, link, affiliation}
 function renderList(selector, list) {
   const el = document.querySelector(selector);
   if (!el || !Array.isArray(list)) return;
   list.forEach((item) => {
     if (!item) return;
-    const name = (item.name || "").trim();
+    const name = esc(item.name || "");
+    const aff  = item.affiliation ? ` (${esc(item.affiliation)})` : "";
     const link = (item.link || "#").trim();
+
     const line = document.createElement("div");
     line.className = "line";
-    // open in a new tab; noopener for security
-    line.innerHTML = `<a href="${link}" target="_blank" rel="noopener">${name}</a>`;
+    line.innerHTML = `<a href="${esc(link)}" target="_blank" rel="noopener">${name}${aff}</a>`;
     el.appendChild(line);
   });
 }
