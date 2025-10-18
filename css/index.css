@@ -27,13 +27,26 @@ body {
 #banner .carousel-inner{
     text-align: center;
     width: 100%;
+    background: linear-gradient(to right, #dcdcdc 0%, #ffffff 40%, #ffffff 60%, #dcdcdc 100%);
 }
-#banner .carousel-inner img{
-    opacity: 0.9;
-    /*filter: blur(30%);*/
+/*#banner .carousel-inner img{
+
     width: 100%;
-    height: 700px; /* 自动调整图片的高度，保持原始比例 */
-    object-fit: cover; /* 调整图片在指定尺寸内的填充方式，可以根据需要选择其他值（如 contain 等）*/
+    height: 700px; 
+    object-fit: cover; 
+}*/
+#banner .carousel-inner img{
+    opacity: 0.95;               /* optional: 稍微提高清晰度 */
+    width: auto !important;      /* 关键：不要强制100% */
+    max-width: 100%;             /* 保持响应式 */
+    height: 700px;               /* 你的固定高度保留 */
+    object-fit: contain;         /* 关键：不裁切，完整展示 */
+    display: inline-block;       /* 与 text-align:center 配合水平居中 */
+}
+
+/* 如果你用了方案 B（padding: 0 40px），可以把图片最大宽度减去左右留白： */
+#banner .carousel-inner img{
+    max-width: calc(100% - 80px); /* 40px + 40px */
 }
 
 #banner .carousel-indicators li{
