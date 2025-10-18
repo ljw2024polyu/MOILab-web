@@ -1,67 +1,87 @@
-
 <nav class="navbar navbar-default default" role="navigation">
     <div class="logo-layer row">
-        <div class="header-wrap__left col-md-3 col-sm-3">
-            <a href="index.html">
-                <img src="pic/moi-favicon.png" alt="logo" class="baseUrl cmga-logo">
-            </a>
-        </div>
-        <div class="header-wrap__right col-md-9 col-sm-9">
-            <a href="https://www.polyu.edu.hk/en/" target="_blank">
-                <img src="pic/head-right.png" alt="PolyU" class="polyu-main-logo main-logo">
-            </a>
-            <a href="https://www.polyu.edu.hk/ama/" target="_blank">
-                <img src="pic/header-ama-logo.png" alt="Logo" class="main-logo ama-logo">
-            </a>
-        </div>
+      <div class="header-wrap__left col-md-3 col-sm-3">
+        <a href="index.html">
+          <img src="pic/moi-favicon.png" alt="logo" class="baseUrl cmga-logo">
+        </a>
+      </div>
+      <div class="header-wrap__right col-md-9 col-sm-9">
+        <a href="https://www.polyu.edu.hk/en/" target="_blank">
+          <img src="pic/head-right.png" alt="PolyU" class="polyu-main-logo main-logo">
+        </a>
+        <a href="https://www.polyu.edu.hk/ama/" target="_blank">
+          <img src="pic/header-ama-logo.png" alt="Logo" class="main-logo ama-logo">
+        </a>
+      </div>
     </div>
+  
     <div class="menu-container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <!--                            <span class="icon-bar"></span>-->
-            </button>
-            <!--            <a class="navbar-brand" href="index.html"><img src="picture/logo.png" alt="logo" width="80px"></a>-->
-        </div>
-        <nav class="navbar navbar-expand-sm navbar-collapse" id="menu">
-            <ul class="nav navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link baseUrl" href="index.html">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">About Us<span class="arrow"></span></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <!-- <a class="dropdown-item baseUrl" href="profile.html">Institute Profile</a> -->
-                        <!--                        <a class="dropdown-item baseUrl" href="announcement.html">Announcements</a>-->
-                        <a class="dropdown-item baseUrl" href="structure.html">Structure and Members</a>
-                        <!-- <a class="dropdown-item baseUrl" href="visitors.html">Visitors</a> -->
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">Events<span class="arrow"></span></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item baseUrl" href="conference.html">Conferences</a>
-                        <a class="dropdown-item baseUrl" href="seminars.html">Seminars</a>
-                        <a class="dropdown-item baseUrl" href="colloquiums.html">Colloquiums</a>
-                        <a class="dropdown-item baseUrl" href="lectures.html">Lectures</a>
-                        <a class="dropdown-item baseUrl" href="workshop.html">Workshops</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown">Research<span class="arrow"></span></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item baseUrl" href="publication.html">Selected Publication</a>
-                        <!--                        <a class="dropdown-item baseUrl" href="papers.html">Working Paper Series</a>-->
-                    </div>
-                </li>
-                <li><a href="contact.html" class="baseUrl">Contact Us</a></li>
+      <div class="navbar-header">
+        <!-- Bootstrap 3 collapse button -->
+        <button type="button"
+                class="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+  
+      <!-- Use Bootstrap 3 collapse container -->
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link baseUrl" href="index.html">Home</a>
+          </li>
+  
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle"
+               data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">
+              About Us <span class="arrow"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a class="dropdown-item baseUrl" href="structure.html">Structure and Members</a></li>
             </ul>
-        </nav>
+          </li>
+  
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle"
+               data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">
+              Events <span class="arrow"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a class="dropdown-item baseUrl" href="conference.html">Conferences</a></li>
+              <li><a class="dropdown-item baseUrl" href="seminars.html">Seminars</a></li>
+              <li><a class="dropdown-item baseUrl" href="colloquiums.html">Colloquiums</a></li>
+              <li><a class="dropdown-item baseUrl" href="lectures.html">Lectures</a></li>
+              <li><a class="dropdown-item baseUrl" href="workshop.html">Workshops</a></li>
+            </ul>
+          </li>
+  
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle"
+               data-toggle="dropdown" role="button"
+               aria-haspopup="true" aria-expanded="false">
+              Research <span class="arrow"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a class="dropdown-item baseUrl" href="publication.html">Selected Publication</a></li>
+            </ul>
+          </li>
+  
+          <li><a href="contact.html" class="baseUrl">Contact Us</a></li>
+        </ul>
+      </div>
     </div>
-</nav>
-
-<script>
+  </nav>
+  
+  <script>
     new WOW().init();
-</script>
+  </script>
+  
