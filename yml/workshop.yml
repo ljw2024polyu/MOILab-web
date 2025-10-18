@@ -9,10 +9,10 @@
 #photo: "abc"
 #video: "acb"
 
-- title: "Inauguration Ceremony for Research Centre for Intelligent Operations Research (IOR) cum Workshop on Al and Operations Research"
-  date: "16 August, 2024" ## format: date: September 1, 2023
-  time: "9:30am-5:00pm"
-  venue: "N001"
-  speaker: "Prof. Yuan Yaxiang / Prof. Teo Chung Piaw"
-  poster: "https://www.polyu.edu.hk/ama/-/media/department/ama/events/2024/8/ior-inauguration-ceremony--ws20240816poster.jpg"
-  website: "https://www.polyu.edu.hk/ama/news-and-events/events/2024/8/20240816-inauguration-ceremony-for-research-centre-for-intelligent-operations-research/"
+# - title: "Inauguration Ceremony for Research Centre for Intelligent Operations Research (IOR) cum Workshop on Al and Operations Research"
+#   date: "16 August, 2024" ## format: date: September 1, 2023
+#   time: "9:30am-5:00pm"
+#   venue: "N001"
+#   speaker: "Prof. Yuan Yaxiang / Prof. Teo Chung Piaw"
+#   poster: "https://www.polyu.edu.hk/ama/-/media/department/ama/events/2024/8/ior-inauguration-ceremony--ws20240816poster.jpg"
+#   website: "https://www.polyu.edu.hk/ama/news-and-events/events/2024/8/20240816-inauguration-ceremony-for-research-centre-for-intelligent-operations-research/"
