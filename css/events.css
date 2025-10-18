@@ -1,0 +1,56 @@
+.event{
+    margin-top: 50px;
+    width: 53%;
+    margin-bottom: 80px;
+}
+.event-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+.event-card:hover {
+    transform: scale(1.05);
+}
+.event-card h4 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.event-card p {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.event-card .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+.operation{
+    margin-top: 50px;
+}
+
+.history-events {
+    margin-top: 40px;
+}
+
+h1 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.year {
+    /*background-color: #f0f0f0; !* 年份行的背景颜色 *!*/
+    font-size: 22px;
+    color: black;
+    font-weight: bold; /* 年份行的字体加粗 */
+    cursor: pointer; /* 年份行的鼠标样式为指针 */
+    margin-bottom: 20px; /* 年份行底部的边距 */
+}

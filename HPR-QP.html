@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPR-QP: A GPU Solver for Convex Composite Quadratic Programming</title>
+    <!-- Include MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --background-primary: #ffffff;
+            --background-secondary: #f8fafc;
+            --border-color: #e5e7eb;
+            --code-background: #f1f5f9;
+            --table-header: #f3f4f6;
+            --success-color: #10b981;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 1500px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3.5em;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px var(--shadow-light);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+        }
+
+        .author {
+            color: var(--secondary-color);
+            font-size: 2em;
+            text-align: center;
+            display: block;
+            margin: 30px 0;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        p {
+            /* color: var(--text-secondary); */
+            font-size: 1.5em;
+            margin: 15px 0;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+        }
+
+        .contact-info {
+            color: var(--text-secondary);
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .github-link {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 1.8em;
+            margin: 30px 0;
+            font-weight: 500;
+        }
+
+        .github-link a {
+            color: var(--success-color);
+            background: linear-gradient(135deg, var(--background-secondary) 0%, #ecfdf5 100%);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid var(--success-color);
+            transition: all 0.3s ease;
+        }
+
+        .github-link a:hover {
+            background: var(--success-color);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .code-block {
+            background-color: var(--code-background);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px var(--shadow-light);
+            margin: 20px 0;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background-color: var(--background-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-light);
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--table-header) 0%, #e5e7eb 100%);
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover td {
+            background-color: var(--background-secondary);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1em;
+            color: var(--text-light);
+            padding: 20px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .mjx-chtml {
+            margin: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>HPR-QP: A GPU Solver for Convex Composite Quadratic Programming</h1>
+    <div class="author">
+        Kaihuang Chen,
+        <a href="https://www.polyu.edu.hk/ama/profile/dfsun/" target="_blank">Defeng Sun</a >,
+        <a href="https://paulyuanmath.github.io/" target="_blank">Yancheng Yuan</a >,
+        Guojun Zhang,
+        <a href="https://msm.bjut.edu.cn/info/1091/2624.htm" target="_blank">Xinyuan Zhao</a >
+    </div>
+    <p class="contact-info">
+        Contact: {kaihuang.chen, guojun.zhang}@connect.polyu.hk, {yancheng.yuan, defeng.sun}@polyu.edu.hk,
+        xyzhao@bjut.edu.cn
+    </p >
+
+    <p class="github-link">
+        Find the open-source solver at <a
+            href="https://github.com/PolyU-IOR/HPR-QP">https://github.com/PolyU-IOR/HPR-QP</a >
+    </p >
+
+    <hr>
+
+    <h2>Overview</h2>
+    <p>
+        HPR-QP is a Julia implementation of a dual Halpern Peaceman–Rachford (HPR) method for solving large-scale convex
+        composite quadratic programming (CCQP) problems on the GPU. It efficiently handles problems of the form:
+    </p >
+    <p style="text-align: center;">
+        \[
+        \begin{array}{ll}
+        \underset{x \in \mathbb{R}^n}{
+        min} \quad & \tfrac{1}{2}\langle x,Qx \rangle + \langle c, x \rangle + \phi(x) \\
+        \mathrm{s.t.} \quad & l \leq A x \leq u,
+        \end{array}
+        \]
+    </p >
+    <ul style="font-size: 1.5em;">
+        <li>\(Q\) is a positive semidefinite self-adjoint linear operator;</li>
+        <li>The matrix form of \(Q\) may be unavailable in large-scale instances (e.g., QAP relaxations,
+            LASSO);</li>
+        <li>\(\phi\) is a proper closed convex function.</li>
+    </ul>
+
+    <h2>Numerical Results</h2>
+    <ul style="font-size: 1.5em;">
+        <li><strong>HPR-QP</strong> is implemented in Julia and leverages CUDA for GPU acceleration</li>
+        <li><a href="https://github.com/jinwen-yang/PDQP.jl" target="_blank"><strong>PDQP</strong></a > (GPU, downloaded
+            in April 2025)</li>
+        <li><a href="https://github.com/jump-dev/SCS.jl" target="_blank"><strong>SCS</strong></a > (GPU, version 2.1.0)
+            is written in C/C++ with a Julia interface. GPU acceleration is enabled via its indirect solver, which
+            performs all matrix operations on the GPU</li>
+        <li><a href="https://github.com/oxfordcontrol/Clarabel.jl/tree/CuClarabel"
+                target="_blank"><strong>CuClarabel</strong></a > (GPU, version 0.10.0)</li>
+        <li><a href="https://www.gurobi.com/" target="_blank"><strong>Gurobi</strong></a > (CPU, version 12.0.2, academic
+            license) is executed on CPU using the barrier method</li>
+        <li>All benchmarks were conducted on a SuperServer SYS-420GP-TNR with an NVIDIA A100-SXM4-80GB GPU, Intel Xeon
+            Platinum 8338C CPU @ 2.60 GHz, and 256 GB RAM</li>
+    </ul>
+
+    <h3>Maros–Mészáros Data Set (137 Instances; Tolerances \(10^{-6}\), \(10^{-8}\))</h3>
+    <table>
+        <!-- <caption>Maros–Mészáros: SGM10 and # Solved</caption> -->
+        <tr>
+            <th>Solver</th>
+            <th>SGM10 \((10^{-6})\)</th>
+            <th>Solved \((10^{-6})\)</th>
+            <th>SGM10 \((10^{-8})\)</th>
+            <th>Solved \((10^{-8})\)</th>
+        </tr>
+        <tr>
+            <td>HPR-QP</td>
+            <td>10.5</td>
+            <td>129</td>
+            <td>12.6</td>
+            <td>128</td>
+        </tr>
+        <tr>
+            <td>PDQP</td>
+            <td>33.1</td>
+            <td>125</td>
+            <td>42.5</td>
+            <td>124</td>
+        </tr>
+        <tr>
+            <td>SCS</td>
+            <td>126.0</td>
+            <td>103</td>
+            <td>165.0</td>
+            <td>93</td>
+        </tr>
+        <tr>
+            <td>CuClarabel</td>
+            <td>3.7</td>
+            <td>130</td>
+            <td>7.8</td>
+            <td>124</td>
+        </tr>
+        <tr>
+            <td>Gurobi</td>
+            <td>0.4</td>
+            <td>137</td>
+            <td>1.2</td>
+            <td>135</td>
+        </tr>
+    </table>
+
+    <h3>QAP Relaxations (36 Instances; Tolerances \(10^{-6}\), \(10^{-8}\))</h3>
+    <table>
+        <!-- <caption>QAP Relaxations: SGM10 and # Solved</caption> -->
+        <tr>
+            <th>Solver</th>
+            <th>SGM10 \((10^{-6})\)</th>
+            <th>Solved \((10^{-6})\)</th>
+            <th>SGM10 \((10^{-8})\)</th>
+            <th>Solved \((10^{-8})\)</th>
+        </tr>
+        <tr>
+            <td>HPR-QP</td>
+            <td>1.8</td>
+            <td>36</td>
+            <td>4.7</td>
+            <td>36</td>
+        </tr>
+        <tr>
+            <td>PDQP</td>
+            <td>124.1</td>
+            <td>23</td>
+            <td>149.4</td>
+            <td>23</td>
+        </tr>
+        <tr>
+            <td>SCS</td>
+            <td>11.3</td>
+            <td>36</td>
+            <td>86.0</td>
+            <td>36</td>
+        </tr>
+        <tr>
+            <td>CuClarabel</td>
+            <td>13.6</td>
+            <td>33</td>
+            <td>114.9</td>
+            <td>22</td>
+        </tr>
+        <tr>
+            <td>Gurobi</td>
+            <td>24.8</td>
+            <td>36</td>
+            <td>26.8</td>
+            <td>36</td>
+        </tr>
+    </table>
+
+    <h3>LASSO Problems (11 Instances; Tolerance \(10^{-8}\))</h3>
+    <table>
+        <caption> Abbreviations: T = time-limit, F = failure (e.g., unbounded or infeasible)</caption>
+        <tr>
+            <th>Instance</th>
+            <th>HPR-QP</th>
+            <th>PDQP</th>
+            <th>SCS</th>
+            <th>CuClarabel</th>
+            <th>Gurobi</th>
+        </tr>
+        <tr>
+            <td>abalone7</td>
+            <td>10.5</td>
+            <td>372.5</td>
+            <td>T</td>
+            <td>24.4</td>
+            <td>127.3</td>
+        </tr>
+        <tr>
+            <td>bodyfat7</td>
+            <td>1.2</td>
+            <td>33.3</td>
+            <td>T</td>
+            <td>2.2</td>
+            <td>30.8</td>
+        </tr>
+        <tr>
+            <td>E2006.test</td>
+            <td>0.2</td>
+            <td>1.3</td>
+            <td>T</td>
+            <td>15.4</td>
+            <td>9.0</td>
+        </tr>
+        <tr>
+            <td>E2006.train</td>
+            <td>0.7</td>
+            <td>1.9</td>
+            <td>F</td>
+            <td>116.0</td>
+            <td>277.8</td>
+        </tr>
+        <tr>
+            <td>housing7</td>
+            <td>22.6</td>
+            <td>123.3</td>
+            <td>T</td>
+            <td>5.7</td>
+            <td>125.9</td>
+        </tr>
+        <tr>
+            <td>log1p.E2006.test</td>
+            <td>7.0</td>
+            <td>1416.9</td>
+            <td>T</td>
+            <td>196.0</td>
+            <td>137.0</td>
+        </tr>
+        <tr>
+            <td>log1p.E2006.train</td>
+            <td>17.3</td>
+            <td>2983.2</td>
+            <td>T</td>
+            <td>361.0</td>
+            <td>878.8</td>
+        </tr>
+        <tr>
+            <td>mpg7</td>
+            <td>0.6</td>
+            <td>18.1</td>
+            <td>2000.0</td>
+            <td>0.3</td>
+            <td>1.2</td>
+        </tr>
+        <tr>
+            <td>pyrim5</td>
+            <td>49.1</td>
+            <td>410.6</td>
+            <td>T</td>
+            <td>3.5</td>
+            <td>35.9</td>
+        </tr>
+        <tr>
+            <td>space_ga9</td>
+            <td>0.6</td>
+            <td>62.7</td>
+            <td>1210.0</td>
+            <td>6.7</td>
+            <td>38.1</td>
+        </tr>
+        <tr>
+            <td>triazines4</td>
+            <td>401.3</td>
+            <td>3533.3</td>
+            <td>T</td>
+            <td>26.0</td>
+            <td>843.1</td>
+        </tr>
+        <tr>
+            <th>SGM10 (Time)</th>
+            <th>13.2</th>
+            <th>161.8</th>
+            <th>3091.0</th>
+            <th>26.1</th>
+            <th>91.2</th>
+        </tr>
+    </table>
+
+    <h2>Citation</h2>
+    <div class="code-block">
+        @article{chen2025hpr,<br>
+        title={HPR-QP: A dual Halpern Peaceman-Rachford method for solving large-scale convex composite quadratic
+        programming},<br>
+        author={Chen, Kaihuang and Sun, Defeng and Yuan, Yancheng and Zhang, Guojun and Zhao, Xinyuan},<br>
+        journal={arXiv preprint arXiv:2507.02470},<br>
+        year={2025}<br>
+        }
+    </div>
+
+    <div class="footer">
+        © 2025 HPR-QP Solver Team. All rights reserved.
+    </div>
+</body>
+
+</html>

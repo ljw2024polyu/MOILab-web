@@ -1,0 +1,46 @@
+.container{
+    margin: 100px auto;
+}
+/*p-words*/
+#p-words .col-md-12 p{
+    font-size: 18px;
+}
+#p-words span{
+    font-size: 18px;
+    font-weight: bolder;
+    color: orangered;
+    margin-right: 5px;
+}
+#p-words .item p{
+    display: inline;
+
+}
+#p-words .item div{
+    margin-bottom: 10px;
+}
+
+#p-words h1{
+    font-weight: bolder;
+}
+#p-words p{
+    font-size: 15px;
+    margin: 20px auto;
+}
+.img-container img{
+    width: 35%;
+}
+.img-container{
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    margin-bottom: 50px;
+}
+.title{
+    font-weight: bolder;
+    color: black!important;
+}
+.objectives h2{
+    text-align: left;
+    font-weight: bolder;
+    margin-top: 20px;
+}

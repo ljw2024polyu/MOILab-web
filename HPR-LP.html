@@ -1,0 +1,364 @@
+<script type="text/javascript">
+    var gk_isXlsx = false;
+    var gk_xlsxFileLookup = {};
+    var gk_fileData = {};
+    function filledCell(cell) {
+        return cell !== '' && cell != null;
+    }
+    function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                    row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                    headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+    }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPR-LP: A GPU Solver for Linear Programming</title>
+    <!-- Include MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --background-primary: #ffffff;
+            --background-secondary: #f8fafc;
+            --border-color: #e5e7eb;
+            --code-background: #f1f5f9;
+            --table-header: #f3f4f6;
+            --success-color: #10b981;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 1500px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3.5em;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px var(--shadow-light);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .author {
+            color: var(--secondary-color);
+            font-size: 2em;
+            text-align: center;
+            display: block;
+            margin: 30px 0;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        p {
+            color: var(--text-secondary);
+            font-size: 1.5em;
+            margin: 15px 0;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+        }
+
+        .contact {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .code-block {
+            background-color: var(--code-background);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px var(--shadow-light);
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background-color: var(--background-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-light);
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--table-header) 0%, #e5e7eb 100%);
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            background-color: var(--background-primary);
+            transition: background-color 0.3s ease;
+        }
+
+        tr:hover td {
+            background-color: var(--background-secondary);
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1em;
+            color: var(--text-light);
+            padding: 20px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .mjx-chtml {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .p-large {
+            font-size: small;
+        }
+
+        caption {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .contact-info {
+            color: var(--text-secondary);
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .github-link {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 1.8em;
+            margin: 30px 0;
+            font-weight: 500;
+        }
+
+        .github-link a {
+            color: var(--success-color);
+            background: linear-gradient(135deg, var(--background-secondary) 0%, #ecfdf5 100%);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid var(--success-color);
+            transition: all 0.3s ease;
+        }
+
+        .github-link a:hover {
+            background: var(--success-color);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <h1>HPR-LP: A GPU Solver for Linear Programming</h1>
+    <div class="author">
+        Kaihuang Chen,
+        <a href="https://www.polyu.edu.hk/ama/profile/dfsun//" target="_blank" style="color: var(--success-color); text-decoration: underline; font-weight: 600; cursor: pointer;">Defeng Sun</a>, 
+        <a href="https://paulyuanmath.github.io/" target="_blank" style="color: var(--success-color); text-decoration: underline; font-weight: 600; cursor: pointer;">Yancheng Yuan</a>, 
+        Guojun Zhang, 
+        <a href="https://msm.bjut.edu.cn/info/1091/2624.htm" target="_blank" style="color: var(--success-color); text-decoration: underline; font-weight: 600; cursor: pointer;">Xinyuan Zhao</a>
+        <br>
+    </div>
+    <p class="contact-info">
+        Contact: {kaihuang.chen, guojun.zhang}@connect.polyu.hk, {yancheng.yuan, defeng.sun}@polyu.edu.hk,
+        xyzhao@bjut.edu.cn
+    </p>
+
+    <p class="github-link">
+        Find the open-source solver at <a
+            href="https://github.com/PolyU-IOR/HPR-LP">https://github.com/PolyU-IOR/HPR-LP</a>
+    </p>
+
+    <hr>
+
+    <h2>Overview</h2>
+    <p>
+        HPR-LP is a Julia implementation of the Halpern Peaceman-Rachford (HPR) method for solving linear programming
+        (LP) problems on the GPU. It is designed to efficiently handle large-scale LP problems with the following
+        formulation:
+    </p>
+    <p style="text-align: center;">
+        \[
+        \begin{array}{ll}
+        \underset{x \in \mathbb{R}^n}{\min} \quad & \langle c, x \rangle \\
+        \text{s.t.} \quad & A_1 x = b_1, \\
+        & A_2 x \geq b_2, \\
+        & l \leq x \leq u .
+        \end{array}
+        \]
+    </p>
+
+    <h2>Numerical Performance of HPR-LP Compared to Other Solvers</h2>
+    <p>
+        HPR-LP runs fast on an NVIDIA A100-SXM4-80GB GPU! 😊 It outperforms other solvers like cuPDLP.jl in both
+        computational efficiency and solution accuracy.
+    </p>
+    <table>
+        <caption style="font-size: 1.5em;">Numerical performance of HPR-LP.jl and cuPDLP.jl on 49 instances of Mittelmann's LP benchmark set with
+            Gurobi's presolve</caption>
+        <tr>
+            <th rowspan="2">Tolerance</th>
+            <th colspan="2">1e-4</th>
+            <th colspan="2">1e-6</th>
+            <th colspan="2">1e-8</th>
+        </tr>
+        <tr>
+            <th>SGM10</th>
+            <th>Solved</th>
+            <th>SGM10</th>
+            <th>Solved</th>
+            <th>SGM10</th>
+            <th>Solved</th>
+        </tr>
+        <tr>
+            <td>cuPDLP.jl</td>
+            <td>60.0</td>
+            <td>46</td>
+            <td>118.6</td>
+            <td>45</td>
+            <td>220.6</td>
+            <td>43</td>
+        </tr>
+        <tr>
+            <td>HPR-LP.jl</td>
+            <td>17.4</td>
+            <td>49</td>
+            <td>31.8</td>
+            <td>49</td>
+            <td>59.4</td>
+            <td>48</td>
+        </tr>
+    </table>
+
+    <br><br>
+
+    <table>
+        <caption style="font-size: 1.5em;">SGM10 of HPR-LP.jl and cuPDLP.jl on 20 QAP instances (LP relaxation) with Gurobi's presolve</caption>
+        <tr>
+            <th>Tolerance</th>
+            <th>1e-4</th>
+            <th>1e-6</th>
+            <th>1e-8</th>
+        </tr>
+        <tr>
+            <td>cuPDLP.jl</td>
+            <td>12.7</td>
+            <td>60.0</td>
+            <td>343.1</td>
+        </tr>
+        <tr>
+            <td>HPR-LP.jl</td>
+            <td>2.9</td>
+            <td>8.8</td>
+            <td>60.2</td>
+        </tr>
+    </table>
+
+
+    <h2>Citation</h2>
+    <div class="code-block" style="font-size: 1.5em;">
+        @article{chen2024hpr,<br>
+        title={HPR-LP: An implementation of an HPR method for solving linear programming},<br>
+        author={Chen, Kaihuang and Sun, Defeng and Yuan, Yancheng and Zhang, Guojun and Zhao, Xinyuan},<br>
+        journal={arXiv preprint arXiv:2408.12179},<br>
+        year={2024}<br>
+        }
+    </div>
+
+    <div class="footer">
+        © 2025 HPR-LP Solver Team. All rights reserved.
+    </div>
+</body>
+
+</html>

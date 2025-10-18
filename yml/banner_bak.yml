@@ -1,0 +1,5 @@
+#- banner_image_path: path/to/image.jpg
+#  hyperlink: poster link or other pager link.
+
+- banner_image_path: pic/RCIOR_20240816_2635x700.jpg
+  hyperlink: https://www.polyu.edu.hk/ama/-/media/department/ama/events/2024/8/ior-inauguration-ceremony--ws20240816poster.jpg

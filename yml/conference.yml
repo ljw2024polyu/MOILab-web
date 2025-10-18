@@ -1,0 +1,14 @@
+# please add seminars by chronological order, new one on top.
+# support keys in [meeting,photo,video].
+# example data:
+# - title: "Example Conference of Research Center for Intelligent Operations Research (IOR, 智能運籌學研究中心)"
+#   date: "27 October 2024"
+#   time: "4pm - 5pm (HKT)"
+#   poster: "files/conferences/poster/example_poster.jpg"
+#   meeting: "#"
+#   video: "#"
+#   venue: "TU802"
+#   photo: "#"
+#   detail: "#"
+
+

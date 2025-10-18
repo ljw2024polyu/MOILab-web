@@ -1,0 +1,23 @@
+# please add lectures by chronological order, new one on top.
+# support keys in [meeting,poster,video,photo]. if you don't use anyone of it. please delete it in data.
+## example data:
+#- title: "Example Lecture of Research Center for Intelligent Operations Research"
+#  date: "1 November 2024 (Wedesday)"
+#  time: "3pm - 4pm (HKT)"
+#  poster: "files/conferences/poster/example_poster.jpg"
+#  meeting: "#"
+#  photo: "#"
+#  video: "#"
+#  detail: "#"
+#  venue: "TU802"
+##
+
+- title: "Modeling Individual Glucose Dynamics from Continuous Glucose Monitoring Data"
+  date: "11 April 2025 (Friday)"
+  time: "4pm - 5pm (HKT)"
+  poster: "files/conferences/poster/2025/IOR DL series by Prof Yong Wang _11 Apr 2025.jpg"
+#  meeting: "#"
+#  photo: "#"
+#  video: "#"
+  detail: "https://www.polyu.edu.hk/ama/news-and-events/events/2025/4/20250411-modeling-individual-glucose-dynamics-from-continuous-glucose-monitoring-data/"
+  venue: "Y306"

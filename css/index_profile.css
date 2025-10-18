@@ -1,0 +1,46 @@
+#p-words h1{
+    font-weight: bolder;
+}
+#p-words p{
+    font-size: 18px;
+    margin: 10px auto;
+}
+.img-container img{
+    width: 35%;
+}
+.img-container{
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    margin-bottom: 50px;
+}
+.title{
+    font-weight: bolder;
+    color: black!important;
+}
+.section-title {
+    text-align: center;
+    /*font-size: 30px;*/
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.section-content {
+    margin-bottom: 50px;
+    padding: 20px;
+    font-size: 16px;
+}
+.section-content{
+    text-align: center;
+}
+.section-content p{
+    font-size: 16px;
+}
+
+.section-content img{
+    width: 60%;
+    margin: 50px 30px;
+}
+/*.logo-af{*/
+/*    width: 30%;*/
+/*}*/

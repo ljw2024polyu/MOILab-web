@@ -1,0 +1,48 @@
+#按照现在的内容格式修改/添加
+director:
+  - name: Prof. Defeng Sun, Chair Professor, AMA
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
+
+deputy:
+  - name: Prof. Cedric Yiu Ka-Fai, Professor, AMA
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-cedric-yiu-ka-fai/
+
+assistant:
+  - name: Dr Yancheng Yuan, Assistant Professor, DSAI
+    link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
+  - name: Dr Zaikun Zhang, Assistant Professor, AMA
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/dr-zhang-zaikun/
+
+member:
+  - name: Prof. Xiaojun Chen, Chair Professor, AMA
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-chen-xiaojun/
+  - name: Prof. Min Dai, Chair Professor, AMA & AF
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-dai-min/
+  - name: Prof. Jian Huang, Chair Professor, AMA & DSAI
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-huang-jian/
+  - name: Prof. Kay Chen Tan, Chair Professor, DSAI
+    link: https://www.polyu.edu.hk/dsai/people/academic-staff/tankaychen/
+  - name: Prof. Jing Cai, Professor, HTI
+    link: https://www.polyu.edu.hk/hti/people/academic-staff/prof-cai-jing/
+  - name: Prof. Xiaowen Fu, Professor, ISE
+    link: https://www.polyu.edu.hk/ise/people/academic-staff/xiaowen-fu/
+  - name: Prof. Houduo Qi, Professor, AMA & DSAI
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-qi-houduo/
+  - name: Prof. Anqi Qiu, Professor, HTI
+    link: https://www.polyu.edu.hk/hti/people/academic-staff/prof-qiu-anqi/  
+  - name: Prof. Shuaian Wang, Professor, LMS
+    link: https://www.polyu.edu.hk/lms/people/academic-staff/hans-wang/
+  - name: Prof. Xiaoqi Yang, Professor, AMA
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-yang--xiaoqi/
+  - name: Prof. Zhou Xu, Professor, LMS 
+    link: https://www.polyu.edu.hk/lms/people/academic-staff/zhou-xu/
+  - name: Prof. Ting Kei Pong, Professor, AMA
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-pong-ting-kei/
+  - name: Dr You Dong, Associate Professor, CEE
+    link: https://www.polyu.edu.hk/cee/people/academic-staff/dr-you-dong/
+  - name: Dr Kai Pan, Associate Professor, LMS 
+    link: https://www.polyu.edu.hk/lms/people/academic-staff/kai-pan/
+  - name: Dr Qinghe Sun, Assistant Professor, LMS 
+    link: https://www.polyu.edu.hk/lms/people/academic-staff/qinghe-sun/
+  - name: Dr Xiaoxia Liu, Research Assistant Professor, AMA
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/dr-liu-xiaoxia/

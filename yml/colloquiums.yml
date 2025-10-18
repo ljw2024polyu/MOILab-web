@@ -1,0 +1,12 @@
+# please add seminars by chronological order, new one on top.
+# support keys in [meeting,poster,photo,video].
+## example data:
+#- title: "Example Colloquium of Research Center for Intelligent Operations Research"
+#  date: "2 November, 2023" ## format: date: September 1, 2023
+#  speaker: "Prof. Chat Taiman, Hong Kong Polytechnic University"
+#  meeting: "#"
+#  video: "#"
+#  photo: "#"
+#  poster: "#"
+
+

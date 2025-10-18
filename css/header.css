@@ -1,0 +1,104 @@
+body {
+    font-family: Georgia, serif;
+    /*font-size: 18px;*/
+}
+.navbar-default {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.25);
+    margin-bottom: 0;
+}
+
+.logo-layer{
+    width: 100%;
+}
+
+.header-wrap__left img{
+    width: 80%;
+    margin: 0 10px;
+}
+.header-wrap__left .af-logo{
+    width: 8%;
+}
+.header-wrap__left{
+    margin-top: 10px;
+    padding-left: 140px;
+}
+
+.logo-container-seperator{
+    font-family: "italic";
+    font-size: 35px;
+    color: lightgray;
+    font-weight: lighter;
+    margin: 0 5px;
+}
+.header-wrap__right{
+    padding: 0;
+}
+.header-wrap__right img{
+    padding-right: 20px;
+    margin-top: 15px;
+    /*padding-left: ;*/
+}
+.header-wrap__right img{
+    float: right;
+    width: 20%; /* 图片宽度填充 div */
+}
+.ama-logo{
+    margin-top: 20px !important;
+}
+.polyu-main-logo{
+    /*margin-top: 0 !important;*/
+    /*padding-top: 0 !important;;*/
+    width: 25% !important;
+    /*padding-right: 0 !important;*/
+}
+
+/*menu-related*/
+
+#menu{
+    margin-bottom: 0;
+    background-color: #fff;
+    border: none;
+}
+.menu-container{
+    width: 80%;
+    padding-left: 110px;
+}
+.navbar-default .navbar-nav > li > a, .navbar-right > a {
+    font-size: 15px;
+    font-weight: bold;
+    color: #666;
+    /*color: black;*/
+    height: 60px;
+    line-height: 35px;
+}
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu{
+    width: 200px;
+}
+.dropdown-item{
+    padding: 5px 10px;
+    font-weight: bold;
+    color: #666;
+    line-height: 35px;
+    display: block;
+}
+
+.arrow {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-top: 0.15em solid darkgray;
+    border-right: 0.15em solid darkgray;
+    transform: rotate(135deg);
+    margin-left: 0.3em;
+    margin-bottom: 2px;
+}

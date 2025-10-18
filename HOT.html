@@ -1,0 +1,240 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOT: Efficient Halpern Accelerating Algorithm for Optimal Transport</title>
+    <!-- MathJax Script -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #d63333;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #d63333;
+        }
+        header img {
+            vertical-align: middle;
+            width: 30px;
+            margin: 0 10px;
+        }
+        section {
+            margin: 20px 0;
+        }
+        h2 {
+            color: #d63333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        pre {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        ol {
+            padding-left: 20px;
+        }
+        .highlight {
+            color: #d63333;
+            font-weight: bold;
+        }
+        .blue-highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+        img.result-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #666;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        p {
+            font-size: 16px; /* Updated font size for paragraphs */
+        }
+        .p-highlight {
+            font-size: 25px; /* Larger for emphasis */
+            color: #d63333; /* Darker for prominence */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <img src="pic/flame.png" alt="flame"> HOT  <img src="pic/flame.png" alt="flame">: An Efficient Solver for Optimal Transport Problems
+            </h1>
+            <!-- <p><b>Published in <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em></b></p> -->
+            <div>
+                <p style="display: inline-block">Guojun Zhang,</p>
+                <p style="display: inline-block">Zhexuan Gu,</p>
+                <a href="https://paulyuanmath.github.io/">Yancheng Yuan,</a>
+                <a href="https://www.polyu.edu.hk/ama/profile/dfsun//">Defeng Sun</a>
+                <p style="margin-top: 0;">Contact: {guojun.zhang, zhexuan.gu}@connect.polyu.hk, {yancheng.yuan, defeng.sun}@polyu.edu.hk</p>
+            </div>
+            <p class="p-highlight">Find the open-source solver at <a href="https://github.com/PolyU-IOR/HOT">https://github.com/PolyU-IOR/HOT</a></p>
+        </header>
+
+        <section>
+            <h2>Overview</h2>
+            <p>HOT is designed to solve the reduced 2D optimal transport model which can be formulated as a standard linear programming problem:</p>
+            <div class="mathjax-equation">
+                \[ \begin{array}{ll}
+                \min_{x \in \mathbb{R}^N} & \langle c, x \rangle + \delta_{\mathbb{R}_{+}^{N}}(x) \\
+                \text{s.t.} & Ax = b.
+                \end{array} \]
+            </div>
+            <!-- <p>By leveraging the sparse structure of matrix \( A \) for given 2D histograms with \( m \) rows and \( n \) columns, HOT avoids explicit matrix generation, enhancing computational efficiency.</p> -->
+        </section>
+
+        <!-- <section>
+            <h2>Getting Started</h2>
+            <h3>Prerequisites</h3>
+            <p>First, install the necessary packages listed in <code>requirements.txt</code>. For PyTorch, visit the <a href="https://pytorch.org/get-started/locally/" title="torch">official PyTorch website</a> to download the version compatible with your CUDA Toolkit.</p>
+            <pre><code>pip install -r requirements.txt</code></pre>
+
+            <h3>Example: Solving an OT Problem Between Two Grayscale Images</h3>
+            <pre><code>python -m demo.py</code></pre>
+            <p>The pipeline of this demo is as follows:</p>
+            <ol>
+                <li>Specify the paths to the two images used for the OT problem.</li>
+                <li>Specify the desired crop size (<em>m</em>, <em>n</em>) of two images.</li>
+                <li>Read the images, convert them to grayscale, resize, and perform <em>ℓ₁</em> normalization.</li>
+                <li>Generate <em>b</em> and <em>c</em>.</li>
+                <li>Execute the HOT Solver.</li>
+            </ol>
+            <p>In most cases, you only need to <span class="blue-highlight">update the image paths and desired crop size in demo.py</span> accordingly. You can also adapt this pipeline to suit your project's needs.</p>
+        </section> -->
+
+        <section>
+            <h2>Numerical Perfoemance of HOT Compared to Other Solvers</h2>
+            <p>The HOT solver runs <span class="highlight">fast</span>! 😊</p>
+            <p>Apart from the high computational efficiency, HOT also enjoys a significant <span class="highlight">advantage in memory usage</span> compared to most other popular algorithms. 😄</p>
+            <img src="pic/result.png" alt="Result graph" class="result-img">
+        </section>
+
+        <section>
+            <h2>A User-friendly Interface</h2>
+            <p>We provide an example <a href="https://github.com/PolyU-IOR/HOT/blob/main/demo.py">here</a> to demonstrate the usage of the HOT solver. For computing Kantorovich-Wasserstein distance between two images, you only have to specify the image paths and desired resolutions.</p>
+        </section>
+
+        <section>
+            <h2>An Application of HOT in Color Transfer</h2>
+            <!-- <p>The <em>ColorTransfer</em> folder contains a Jupyter notebook, <code>color_transfer.ipynb</code>, which provides a detailed walkthrough of performing <strong>color transfer</strong> using the HOT Solver.</p> -->
+            <!-- <p><strong>Key Feature</strong>:  -->
+            <p>We provide a notebook <a href="https://github.com/PolyU-IOR/HOT/blob/main/ColorTransfer/color_transfer.ipynb">color_transfer.ipynb</a> to demonstrate the usage of the HOT solver in color transfer. Some examples are shown below</p>
+            <img src="pic/color_transfer_V3.jpg" alt="Color transfer result" class="result-img">
+        </section>
+
+        <!-- <section>
+            <h2>Performance Optimization</h2>
+            <p>On our RTX 4090, basic vector operations (e.g., vector addition, subtraction) become a bottleneck as image resolution increases. We adopt a heuristic block strategy to split large vectors to fit the 16MB L1-cache of the GPU:</p>
+            <pre><code># m, n are rows and columns of the 2D histograms respectively
+# We denote params as N in our manuscript
+params = m * m * n + n * n * m
+if crop_size < 128:
+    blocks = 1
+else:
+    # params * 8 / 1024**2 is the megabytes the vector takes
+    blocks = math.ceil(params * 8 / 1024**2 / 16)
+pad = params // blocks
+            </code></pre>
+            <p>😊 You may need to <strong>adjust the 'block' parameter</strong> to replicate our results if you are <strong>not using an RTX 4090</strong>!</p>
+        </section> -->
+
+        <section>
+            <h2>Citation</h2>
+            <pre><code>@article{zhang2025hot,
+title={HOT: An efficient Halpern accelerating algorithm for optimal transport problems},
+author={Zhang, Guojun and Gu, Zhexuan and Yuan, Yancheng and Sun, Defeng},
+journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+year={2025},
+publisher={IEEE}
+}</code></pre>
+        </section>
+
+        <footer>
+            <p>© 2025 HOT Solver Team. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

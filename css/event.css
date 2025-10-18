@@ -1,0 +1,65 @@
+.event{
+    margin-top: 50px;
+    width: 70%;
+    margin-bottom: 80px;
+}
+
+.event-card {
+    padding: 20px;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+.event-card:hover {
+    transform: scale(1.02);
+}
+.event-card h4 {
+    font-weight: bolder;
+    color: firebrick;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.event-card p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.event-card .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+h1{
+    margin-bottom: 30px;
+    text-align: center;
+    /*font-weight: bolder;*/
+}
+.year {
+    /*background-color: #f0f0f0; !* 年份行的背景颜色 *!*/
+    font-size: 22px;
+    color: black;
+    font-weight: bold; /* 年份行的字体加粗 */
+    cursor: pointer; /* 年份行的鼠标样式为指针 */
+    margin-bottom: 20px; /* 年份行底部的边距 */
+}
+/*utilities.less自带hide属性，不需要自己定义
+/*.event-container {*/
+/*    display: block;*/
+/*}*/
+/*.hide {*/
+/*    display: none;*/
+/*}*/
+
+
+.seminars-card{
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+.seminars-card h4{
+    font-weight: normal;
+    color: black;
+}

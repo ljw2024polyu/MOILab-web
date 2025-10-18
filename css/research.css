@@ -1,0 +1,12 @@
+.section-title{
+    font-weight: bolder;
+    text-align: center;
+    margin: 50px;
+}
+.section-content{
+    margin-bottom: 70px;
+}
+.section-content li{
+    font-size: 16px;
+    padding: 10px;
+}
