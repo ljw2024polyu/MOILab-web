@@ -1,16 +1,21 @@
-/* ===== Header / Footer ===== */
+/* ===== Header / Footer ===== */ 
 $(".header").load("components/header.html");
 $(".footer").load("components/footer.html");
 
 /* ===== Helpers ===== */
-function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
+function esc(s){
+  return String(s||"")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
 
-function $(sel, root){ return (root||document).querySelector(sel); }
-function exists(sel){ return !!$(sel); }
+// DO NOT override jQuery `$`
+const qs = (sel, root=document) => root.querySelector(sel);
+
+function exists(sel){ return !!qs(sel); }
 
 function renderList(sel, arr){
-  const el = $(sel);
+  const el = qs(sel);
   if (!el || !Array.isArray(arr)) return false;
   el.innerHTML = "";
   arr.forEach(item=>{
@@ -27,7 +32,7 @@ function renderList(sel, arr){
 }
 
 function appendTextList(sel, arr){
-  const el = $(sel);
+  const el = qs(sel);
   if (!el || !Array.isArray(arr)) return false;
   el.innerHTML = "";
   arr.forEach(t=>{
@@ -65,34 +70,31 @@ function parseYAMLData(text){
   const assists   = data.assistant|| [];
   const teams     = data.research_teams || [];
 
-  // director / deputy: try new IDs first, then old ones
+  // director / deputy
   renderList("#tc-director", directors) || renderList("#director", directors);
   renderList("#tc-deputy",  deputies)  || renderList("#deputy",  deputies);
 
-  // Technical Committee members:
-  // if merged container exists -> render all
+  // Technical Committee members
   if (!renderList("#tc-members", members)) {
-    // else try split containers; first by affiliation, then fallback all-left
     const polyu  = members.filter(x => (x.affiliation||"").toLowerCase()==="polyu");
     const huawei = members.filter(x => (x.affiliation||"").toLowerCase()==="huawei");
     const anySplit =
-      renderList("#tc-members-polyu",  polyu) |
+      renderList("#tc-members-polyu",  polyu) ||
       renderList("#tc-members-huawei", huawei);
     if (!anySplit) {
-      // legacy single container id
-      renderList("#member", members);
+      renderList("#member", members); // legacy
     }
   }
 
-  // Management Support Team:
+  // Management Support Team
   if (!renderList("#mst", assists)) {
     const polyu  = assists.filter(x => (x.affiliation||"").toLowerCase()==="polyu");
     const huawei = assists.filter(x => (x.affiliation||"").toLowerCase()==="huawei");
     const anySplit =
-      renderList("#mst-polyu",  polyu) |
+      renderList("#mst-polyu",  polyu) ||
       renderList("#mst-huawei", huawei);
     if (!anySplit) {
-      renderList("#management", assists);
+      renderList("#management", assists); // legacy
     }
   }
 
@@ -100,17 +102,9 @@ function parseYAMLData(text){
   appendTextList("#research-teams", teams);
 }
 
-/* ===== Toggle ===== */
-function toggle(id){
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.classList.toggle("hide");
-}
-
 /* ===== Start ===== */
 loadYAML("yml/structure.yml")
   .then(parseYAMLData)
   .catch(err=>{
     console.error(err);
-    // 可选：在页面上显示加载失败
   });
