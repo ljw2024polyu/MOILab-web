@@ -1,53 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Distinguished Lectures</title>
-  <link rel="icon" href="pic/logoicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="css/conferences.css"><!-- reuse your card styles -->
-  <link rel="stylesheet" href="css/animate.css">
-  <link rel="stylesheet" href="css/footer.css">
-
-  <style>
-    /* Small, safe tweaks in case conferences.css doesn't define these */
-    .event { padding-top: 24px; padding-bottom: 48px; }
-    .lecture-card { margin-bottom: 24px; }
-    .lecture-poster { width: 100%; height: 180px; object-fit: cover; }
-    .lecture-meta { font-size: 14px; color: #666; }
-    .lecture-actions a + a { margin-left: 12px; }
-    .tag {
-      display:inline-block; padding:2px 8px; border-radius:12px; font-size:12px;
-      background:#f0f3f7; margin-right:6px; margin-top:6px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Distinguished Lectures</title>
+    <link rel="icon" href="pic/logoicon.png">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/conferences.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
 
 <div class="header"></div>
-
 <div class="container event wow slideInUp content" id="eventContainer">
-  <div class="eventContainer">
-    <h1>Distinguished Lectures</h1>
-  </div>
-
-  <!-- Cards will be injected into this row -->
-  <div class="row" id="lecturesRow"></div>
+    <!-- lectures cards will be dynamically added here -->
+    <div class="eventContainer">
+        <h1>Distinguished Lectures</h1>
+    </div>
 </div>
-
 <div class="footer wow slideInUp"></div>
-
-<!-- JS (order matters: jQuery → js-yaml → WOW → your script) -->
-<script src="js/jquery-1.11.1.js"></script>
-<script src="js/js-yaml.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script>
-  new WOW().init();
-</script>
-<script src="js/st.js"></script>
 </body>
 </html>
+<script src="js/jquery-1.11.1.js"></script>
+<script src="js/lectures.js"></script>
+<script src="js/js-yaml.min.js"></script>
+<script src="js/wow.min.js"></script>

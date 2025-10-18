@@ -15,11 +15,11 @@ technical_committee:
       - name: Prof. Xu Zhou
         link: https://www.polyu.edu.hk/lms/people/academic-staff/zhou-xu/
         title: Professor
-        affiliation: LMS
-      - name: Dr. Yancheng Yuan
-        link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
+        affiliation: FB
+      - name: Prof. Yancheng Yuan
+        link: https://paulyuanmath.github.io/
         title: Assistant Professor
-        affiliation: DSAI
+        affiliation: AMA
 
   huawei:
     deputy_director:
@@ -48,24 +48,24 @@ management_support_team:
       title: Chair Professor
       affiliation: AMA
     - name: Dr. Yancheng Yuan
-      link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
+      link: https://paulyuanmath.github.io/
       title: Assistant Professor
-      affiliation: DSAI
+      affiliation: AMA
     - name: Li Qian
       link: #
-      title: Administrator
+      title: Researcher
       affiliation: PolyU
 
   huawei:
     - name: Zhang Fan
       link: #
-      title: Administrator
+      title: Researcher
       affiliation: Huawei
     - name: Qian Huibin
       link: #
-      title: Administrator
+      title: Researcher
       affiliation: Huawei
     - name: Zeng Jianshan
       link: #
-      title: Administrator
+      title: Researcher
       affiliation: Huawei
