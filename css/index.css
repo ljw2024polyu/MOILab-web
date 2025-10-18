@@ -379,3 +379,92 @@ button{
 #contact a, .info a, .link_icon a {
     text-decoration: none;
 }
+
+
+
+/* ===== Mobile adaptations for banner & content ===== */
+
+/* Base: keep desktop behavior unchanged */
+#banner .carousel-inner {
+    text-align: center;
+    width: 100%;
+    background: linear-gradient(to right, #dcdcdc 0%, #ffffff 48%, #ffffff 52%, #dcdcdc 100%);
+  }
+  #banner .carousel-inner img{
+    opacity: .95;
+    width: auto !important;
+    max-width: 100%;
+    height: 700px;            /* desktop height */
+    object-fit: contain;      /* no crop */
+    display: inline-block;
+  }
+  
+  /* <= 991px (tablets) */
+  @media (max-width: 991px){
+    /* slightly narrower gray sides and lower banner height */
+    #banner .carousel-inner{
+      background: linear-gradient(to right, #dcdcdc 0%, #ffffff 49%, #ffffff 51%, #dcdcdc 100%);
+    }
+    #banner .carousel-inner img{
+      height: 480px;          /* tablet height */
+    }
+  
+    /* tighten top nav spacing if needed */
+    .navbar { margin-bottom: 10px; }
+  }
+  
+  /* <= 768px (phones, landscape/large phones) */
+  @media (max-width: 768px){
+    /* reduce gray sides and lower height further */
+    #banner .carousel-inner{
+      background: linear-gradient(to right, #e6e6e6 0%, #ffffff 49.5%, #ffffff 50.5%, #e6e6e6 100%);
+    }
+    #banner .carousel-inner img{
+      height: 380px;          /* phone height */
+    }
+  
+    /* headings in sections: slightly smaller & tighter */
+    .title, h1, h2, h3{
+      line-height: 1.25;
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+  
+    /* long text block: improve reading width on phones */
+    #long-text{
+      padding: 0 14px;
+    }
+    #long-text p{
+      font-size: 15.5px;
+      line-height: 1.6;
+    }
+  }
+  
+  /* <= 576px (small phones) */
+  @media (max-width: 576px){
+    /* almost invisible gray sides and compact height */
+    #banner .carousel-inner{
+      background: linear-gradient(to right, #ededed 0%, #ffffff 49.8%, #ffffff 50.2%, #ededed 100%);
+    }
+    #banner .carousel-inner img{
+      height: 320px;          /* small-phone height */
+    }
+  
+    /* adjust floating title if you enable it */
+    #banner .floating-title{
+      font-size: 28px;
+      padding: 14px;
+      left: 50%;
+    }
+  
+    /* lists → better touch spacing */
+    #long-text ul{ margin-left: 18px; }
+    #long-text li{ margin: 6px 0; }
+  }
+  
+  /* very narrow devices (optional safeguard) */
+  @media (max-width: 360px){
+    #banner .carousel-inner img{ height: 280px; }
+    #long-text p{ font-size: 14.5px; }
+  }
+  
