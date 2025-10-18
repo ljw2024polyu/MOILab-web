@@ -2,9 +2,9 @@
 #  hyperlink: poster link or other pager link.
 
 - banner_image_path: pic/moi_hero_1.jpg
-  # hyperlink: https://www.polyu.edu.hk/ama/ior/HPR-QP.html
+  hyperlink: https://www.polyu.edu.hk/ama/news-and-events/news/2025/polyu-huawei-moi-laboratory/
 - banner_image_path: pic/moi_hero_2.jpg
-  # hyperlink: https://www.polyu.edu.hk/ama/ior/HPR-LP.html
+  hyperlink: https://www.polyu.edu.hk/ama/news-and-events/news/2025/polyu-huawei-moi-laboratory/
 # 
 
 
