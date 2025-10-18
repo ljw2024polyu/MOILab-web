@@ -1,40 +1,53 @@
-technical_committee:
-  PolyU:
-    director: Prof. Defeng Sun
-    members:
-      - Prof. Xiaojun Chen
-      - Prof. Xu Zhou
-      - Dr. Yancheng Yuan
-    links:
-      - https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
-      - https://www.polyu.edu.hk/ama/people/academic-staff/prof-chen-xiaojun/
-      - https://www.polyu.edu.hk/lms/people/academic-staff/zhou-xu/
-      - https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
+director:
+  - name: Prof. Defeng Sun
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
+    affiliation: PolyU
 
-  Huawei:
-    deputy_director: Sun Jie
-    members:
-      - Liu Junyan
-      - Sun Chumin
-      - Sun Zhaoyi
-    links:
-      - "#"
+deputy:
+  - name: Sun Jie
+    link: #
+    affiliation: Huawei
 
-management_support_team:
-  PolyU:
-    members:
-      - Prof. Defeng Sun
-      - Dr. Yancheng Yuan
-      - Li Qian
-    links:
-      - https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
-      - https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
-      - "#"
+member:
+  - name: Prof. Xiaojun Chen
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-chen-xiaojun/
+    affiliation: PolyU
+  - name: Prof. Xu Zhou
+    link: https://www.polyu.edu.hk/lms/people/academic-staff/zhou-xu/
+    affiliation: PolyU
+  - name: Dr. Yancheng Yuan
+    link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
+    affiliation: PolyU
+  - name: Liu Junyan
+    link: #
+    affiliation: Huawei
+  - name: Sun Chumin
+    link: #
+    affiliation: Huawei
+  - name: Sun Zhaoyi
+    link: #
+    affiliation: Huawei
 
-  Huawei:
-    members:
-      - Zhang Fan
-      - Qian Huibin
-      - Zeng Jianshan
-    links:
-      - "#"
+assistant:
+  - name: Prof. Defeng Sun
+    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
+    affiliation: PolyU
+  - name: Dr. Yancheng Yuan
+    link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
+    affiliation: PolyU
+  - name: Li Qian
+    link: #
+    affiliation: PolyU
+  - name: Zhang Fan
+    link: #
+    affiliation: Huawei
+  - name: Qian Huibin
+    link: #
+    affiliation: Huawei
+  - name: Zeng Jianshan
+    link: #
+    affiliation: Huawei
+
+research_teams:
+  - Research Team A
+  - Research Team B

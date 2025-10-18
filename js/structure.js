@@ -85,3 +85,26 @@ function toggle(id) {
 loadYAMLFile("yml/structure.yml")
   .then(parseYAMLData)
   .catch(err => console.error("Failed to load YAML file:", err));
+
+  function parseYAMLData(yamlText) {
+    const data = jsyaml.load(yamlText) || {};
+  
+    // helpers
+    const byAff = (arr, org) => (arr || []).filter(x => (x && (x.affiliation||'').toLowerCase() === org));
+    const render = (sel, arr) => renderList(sel, arr || []);
+  
+    // Technical Committee
+    render("#tc-director", data.director);
+    render("#tc-deputy",  data.deputy);
+  
+    render("#tc-members-polyu",  byAff(data.member, "polyu"));
+    render("#tc-members-huawei", byAff(data.member, "huawei"));
+  
+    // Management Support Team
+    render("#mst-polyu",  byAff(data.assistant, "polyu"));
+    render("#mst-huawei", byAff(data.assistant, "huawei"));
+  
+    // Research Teams
+    appendTextList("#research-teams", data.research_teams);
+  }
+  
