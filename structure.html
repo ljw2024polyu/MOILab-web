@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,61 +9,138 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/footer.css">
+    <style>
+        /* Simple styling for the two-panel layout */
+        .block-title{font-weight:700;margin:30px 0 15px;}
+        .org-badge{background:#6b6f79;color:#fff;border-radius:16px;padding:18px 24px;display:inline-block;min-width:160px;text-align:center;}
+        .role-box{background:#e9ecef;border-radius:16px;padding:18px 24px;margin-left:16px;}
+        .line{margin:6px 0;}
+        .section-gap{margin-top:36px;margin-bottom:18px;}
+        @media (max-width: 991px){
+          .role-box{margin-left:0;margin-top:10px;}
+        }
+    </style>
 </head>
 <body>
 <div>
     <div class="header"></div>
+
     <div class="container">
         <div class="structure">
-            <!-- ===== Structure (replace this whole inner block) ===== -->
-            <div class="container wow slideInDown" style="margin-top: 50px;">
-                <h2>Structure and Members</h2>
-            
-                <!-- Technical Committee -->
-                <section class="structure-group" style="margin-top:30px;">
-                <h3>Technical Committee</h3>
-            
-                <h4 onclick="toggle('tc-director')">Director</h4>
-                <div id="tc-director" class="section-content"></div>
-            
-                <h4 onclick="toggle('tc-deputy')">Deputy Director</h4>
-                <div id="tc-deputy" class="section-content"></div>
-            
-                <h4 onclick="toggle('tc-members-polyu')">Members — PolyU</h4>
-                <div id="tc-members-polyu" class="section-content"></div>
-            
-                <h4 onclick="toggle('tc-members-huawei')">Members — Huawei</h4>
-                <div id="tc-members-huawei" class="section-content"></div>
-                </section>
-            
-                <!-- Management Support Team -->
-                <section class="structure-group" style="margin-top:30px;">
-                <h3>Management Support Team</h3>
-            
-                <h4 onclick="toggle('mst-polyu')">PolyU</h4>
-                <div id="mst-polyu" class="section-content"></div>
-            
-                <h4 onclick="toggle('mst-huawei')">Huawei</h4>
-                <div id="mst-huawei" class="section-content"></div>
-                </section>
-            
-                <!-- Research Teams (optional, keep if you will show them) -->
-                <section class="structure-group" style="margin-top:30px;">
-                <h3 onclick="toggle('research-teams')">Research Teams</h3>
-                <div id="research-teams" class="section-content"></div>
-                </section>
+            <!-- ===== Technical Committee ===== -->
+            <div class="container wow slideInDown section-gap">
+                <h2>Technical Committee</h2>
+
+                <div class="row" style="margin-top:18px;">
+                    <!-- PolyU column -->
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <span class="org-badge">PolyU</span>
+                            <div class="role-box">
+                                <h4 class="block-title">Director</h4>
+                                <div id="tc-polyu-director"></div>
+
+                                <h4 class="block-title" style="margin-top:18px;">Members</h4>
+                                <div id="tc-polyu-members"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Huawei column -->
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <span class="org-badge">Huawei</span>
+                            <div class="role-box">
+                                <h4 class="block-title">Deputy Director</h4>
+                                <div id="tc-huawei-deputy"></div>
+
+                                <h4 class="block-title" style="margin-top:18px;">Members</h4>
+                                <div id="tc-huawei-members"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- ===== Management Support Team ===== -->
+            <div class="container wow slideInDown section-gap">
+                <h2>Management Support Team</h2>
+
+                <div class="row" style="margin-top:18px;">
+                    <!-- PolyU column -->
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <span class="org-badge">PolyU</span>
+                            <div class="role-box">
+                                <div id="mst-polyu"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Huawei column -->
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <span class="org-badge">Huawei</span>
+                            <div class="role-box">
+                                <div id="mst-huawei"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logos (keep your original grid) -->
+            <div class="container section-gap">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="https://www.polyu.edu.hk/ama/">
+                            <img class="corp-img"  src="pic/header-ama-logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="https://www.polyu.edu.hk/comp/">
+                            <img class="corp-img"  src="pic/polyu-comp-logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="https://www.polyu.edu.hk/dsai/">
+                            <img class="corp-img lms-logo"  src="pic/DSAI_logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:12px;">
+                    <div class="col-md-3">
+                        <a href="https://www.polyu.edu.hk/lms/">
+                            <img class="corp-img lms-logo"  src="pic/lms-logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="https://www.polyu.edu.hk/cee/">
+                            <img class="corp-img"  src="pic/cee-logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="https://www.polyu.edu.hk/hti/">
+                            <img src="pic/HTI logo-PNG.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="https://www.polyu.edu.hk/ise/">
+                            <img class="corp-img ise-logo" src="pic/ise-logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    
 
     <div class="footer wow slideInUp"></div>
-
 </div>
-</body>
-</html>
+
 <script src="js/jquery-1.11.1.js"></script>
 <script src="js/js-yaml.min.js"></script>
 <script src="js/structure.js"></script>
 <script src="js/wow.min.js"></script>
-
+</body>
+</html>

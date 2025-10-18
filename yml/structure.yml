@@ -1,53 +1,71 @@
-director:
-  - name: Prof. Defeng Sun
-    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
-    affiliation: PolyU
+# New schema used by structure.js
 
-deputy:
-  - name: Sun Jie
-    link: #
-    affiliation: Huawei
+technical_committee:
+  polyu:
+    director:
+      - name: Prof. Defeng Sun
+        link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
+        title: Chair Professor
+        affiliation: AMA
+    members:
+      - name: Prof. Xiaojun Chen
+        link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-chen-xiaojun/
+        title: Chair Professor
+        affiliation: AMA
+      - name: Prof. Xu Zhou
+        link: https://www.polyu.edu.hk/lms/people/academic-staff/zhou-xu/
+        title: Professor
+        affiliation: LMS
+      - name: Dr. Yancheng Yuan
+        link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
+        title: Assistant Professor
+        affiliation: DSAI
 
-member:
-  - name: Prof. Xiaojun Chen
-    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-chen-xiaojun/
-    affiliation: PolyU
-  - name: Prof. Xu Zhou
-    link: https://www.polyu.edu.hk/lms/people/academic-staff/zhou-xu/
-    affiliation: PolyU
-  - name: Dr. Yancheng Yuan
-    link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
-    affiliation: PolyU
-  - name: Liu Junyan
-    link: #
-    affiliation: Huawei
-  - name: Sun Chumin
-    link: #
-    affiliation: Huawei
-  - name: Sun Zhaoyi
-    link: #
-    affiliation: Huawei
+  huawei:
+    deputy_director:
+      - name: Sun Jie
+        link: #
+        title: Professor
+        affiliation: Huawei
+    members:
+      - name: Liu Junyan
+        link: #
+        title: Researcher
+        affiliation: Huawei
+      - name: Sun Chumin
+        link: #
+        title: Researcher
+        affiliation: Huawei
+      - name: Sun Zhaoyi
+        link: #
+        title: Researcher
+        affiliation: Huawei
 
-assistant:
-  - name: Prof. Defeng Sun
-    link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
-    affiliation: PolyU
-  - name: Dr. Yancheng Yuan
-    link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
-    affiliation: PolyU
-  - name: Li Qian
-    link: #
-    affiliation: PolyU
-  - name: Zhang Fan
-    link: #
-    affiliation: Huawei
-  - name: Qian Huibin
-    link: #
-    affiliation: Huawei
-  - name: Zeng Jianshan
-    link: #
-    affiliation: Huawei
+management_support_team:
+  polyu:
+    - name: Prof. Defeng Sun
+      link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
+      title: Chair Professor
+      affiliation: AMA
+    - name: Dr. Yancheng Yuan
+      link: https://www.polyu.edu.hk/dsai/people/academic-staff/yuanyancheng/
+      title: Assistant Professor
+      affiliation: DSAI
+    - name: Li Qian
+      link: #
+      title: Administrator
+      affiliation: PolyU
 
-research_teams:
-  - Research Team A
-  - Research Team B
+  huawei:
+    - name: Zhang Fan
+      link: #
+      title: Administrator
+      affiliation: Huawei
+    - name: Qian Huibin
+      link: #
+      title: Administrator
+      affiliation: Huawei
+    - name: Zeng Jianshan
+      link: #
+      title: Administrator
+      affiliation: Huawei
