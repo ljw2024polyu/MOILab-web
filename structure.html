@@ -15,74 +15,43 @@
     <div class="header"></div>
     <div class="container">
         <div class="structure">
+            <!-- ===== Structure (replace this whole inner block) ===== -->
             <div class="container wow slideInDown" style="margin-top: 50px;">
-                <h2>
-                    Structure and Members
-                </h2>
-
-                <div class="structure">
-                    <div class="container wow slideInDown" style="margin-top: 50px;">
-                        <h3 onclick="toggle('director')">Director</h3>
-                        <div id="director" class="section-content">
-    
-                        </div>
-                        <h3 onclick="toggle('deputy')">Deputy Director</h3>
-                        <div id="deputy" class="section-content">
-    
-                        </div>
-                        <h3 onclick="toggle('management')">Assistant Directors</h3>
-                        <div id="management" class="section-content">
-    
-                        </div>
-                        <h3 onclick="toggle('member')">Members</h3>
-                        <div id="member" class="section-content">
-    
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
-            <div class="section-content">
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="https://www.polyu.edu.hk/ama/">
-                            <img class="corp-img"  src="pic/header-ama-logo.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="https://www.polyu.edu.hk/comp/">
-                            <img class="corp-img"  src="pic/polyu-comp-logo.png" alt="">
-                        </a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="https://www.polyu.edu.hk/dsai/">
-                            <img class="corp-img lms-logo"  src="pic/DSAI_logo.png" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <a href="https://www.polyu.edu.hk/lms/">
-                            <img class="corp-img lms-logo"  src="pic/lms-logo.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="https://www.polyu.edu.hk/cee/">
-                            <img class="corp-img"  src="pic/cee-logo.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="https://www.polyu.edu.hk/hti/">
-                            <img src="pic/HTI logo-PNG.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="https://www.polyu.edu.hk/ise/">
-                            <img class="corp-img ise-logo" src="pic/ise-logo.png" alt="">
-                        </a>
-                    </div>
-                </div>
+                <h2>Structure and Members</h2>
+            
+                <!-- Technical Committee -->
+                <section class="structure-group" style="margin-top:30px;">
+                <h3>Technical Committee</h3>
+            
+                <h4 onclick="toggle('tc-director')">Director</h4>
+                <div id="tc-director" class="section-content"></div>
+            
+                <h4 onclick="toggle('tc-deputy')">Deputy Director</h4>
+                <div id="tc-deputy" class="section-content"></div>
+            
+                <h4 onclick="toggle('tc-members-polyu')">Members — PolyU</h4>
+                <div id="tc-members-polyu" class="section-content"></div>
+            
+                <h4 onclick="toggle('tc-members-huawei')">Members — Huawei</h4>
+                <div id="tc-members-huawei" class="section-content"></div>
+                </section>
+            
+                <!-- Management Support Team -->
+                <section class="structure-group" style="margin-top:30px;">
+                <h3>Management Support Team</h3>
+            
+                <h4 onclick="toggle('mst-polyu')">PolyU</h4>
+                <div id="mst-polyu" class="section-content"></div>
+            
+                <h4 onclick="toggle('mst-huawei')">Huawei</h4>
+                <div id="mst-huawei" class="section-content"></div>
+                </section>
+            
+                <!-- Research Teams (optional, keep if you will show them) -->
+                <section class="structure-group" style="margin-top:30px;">
+                <h3 onclick="toggle('research-teams')">Research Teams</h3>
+                <div id="research-teams" class="section-content"></div>
+                </section>
             </div>
         </div>
     </div>

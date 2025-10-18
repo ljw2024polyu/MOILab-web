@@ -1,73 +1,87 @@
+/* Load header / footer */
 $(".header").load("components/header.html");
 $(".footer").load("components/footer.html");
-// 异步加载 YAML 文件
+
+/* --- Fetch YAML file (async) --- */
 function loadYAMLFile(url) {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    resolve(xhr.responseText);
-                } else {
-                    reject(xhr.statusText);
-                }
-            }
-        };
-        xhr.send();
-    });
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) resolve(xhr.responseText);
+        else reject(xhr.statusText || "HTTP " + xhr.status);
+      }
+    };
+    xhr.send();
+  });
 }
 
-// 解析 YAML 数据并填充表格
-function parseYAMLData(data) {
-    var data = jsyaml.load(data);
-    data['director'].forEach(function(data) {
-        var name = data.name;
-        var link = data.link;
-        var peo = '<div class="line">' +
-            ' <a href=" '+link+' ">  '+name+'  </a> '+
-            '</div>';
-        $('#director').append(peo);
-    });
-    data['deputy'].forEach(function(data) {
-        var name = data.name;
-        var link = data.link;
-        var peo = '<div class="line">' +
-            ' <a href=" '+link+' ">  '+name+'  </a> '+
-            '</div>';
-        $('#deputy').append(peo);
-    });
-    data['assistant'].forEach(function(data) {
-        var name = data.name;
-        var link = data.link;
-        var peo = '<div class="line">' +
-            ' <a href=" '+link+' ">  '+name+'  </a> '+
-            '</div>';
-        $('#management').append(peo);
-    });
-    data['member'].forEach(function(data) {
-        var name = data.name;
-        var link = data.link;
-        var peo = '<div class="line">' +
-            ' <a href=" '+link+' ">  '+name+'  </a> '+
-            '</div>';
-        $('#member').append(peo);
-    });
+/* --- Tiny helpers --- */
+// Render a list of {name, link} into a container
+function renderList(selector, list) {
+  const el = document.querySelector(selector);
+  if (!el || !Array.isArray(list)) return;
+  list.forEach((item) => {
+    if (!item) return;
+    const name = (item.name || "").trim();
+    const link = (item.link || "#").trim();
+    const line = document.createElement("div");
+    line.className = "line";
+    // open in a new tab; noopener for security
+    line.innerHTML = `<a href="${link}" target="_blank" rel="noopener">${name}</a>`;
+    el.appendChild(line);
+  });
 }
 
-function toggle(name) {
-    var container = document.getElementById(name);
-    if (container.classList.contains('hide')) {
-        container.classList.remove('hide');
-    } else {
-        container.classList.add('hide');
-    }
+// Append plain text items (for research team names)
+function appendTextList(selector, arr) {
+  const el = document.querySelector(selector);
+  if (!el || !Array.isArray(arr)) return;
+  arr.forEach((v) => {
+    const text = (typeof v === "string") ? v : (v && v.name) ? v.name : "";
+    if (!text) return;
+    const line = document.createElement("div");
+    line.className = "line";
+    line.textContent = text;
+    el.appendChild(line);
+  });
 }
 
-// 从 YAML 文件中加载数据并解析
-loadYAMLFile('yml/structure.yml')
-    // .then(console.log("load_data_successful"))
-    .then(parseYAMLData)
-    .catch(error => {
-        console.error('Failed to load YAML file:', error);
-    });
+/* --- Parse YAML & render --- */
+function parseYAMLData(yamlText) {
+  const data = jsyaml.load(yamlText) || {};
+
+  // 1) Technical Committee: director & deputy
+  renderList("#tc-director", data.director || []);
+  renderList("#tc-deputy",   data.deputy   || []);
+
+  // 2) Technical Committee members (split by PolyU / Huawei via name)
+  const tcMembers = (data.member || []);
+  const tcPolyU   = tcMembers.filter(m => m && /polyu/i.test(m.name || ""));
+  const tcHuawei  = tcMembers.filter(m => m && /huawei/i.test(m.name || ""));
+  renderList("#tc-members-polyu",  tcPolyU);
+  renderList("#tc-members-huawei", tcHuawei);
+
+  // 3) Management Support Team (assistant in YAML)
+  const assistants = (data.assistant || []);
+  const mstPolyU   = assistants.filter(m => m && /polyu/i.test(m.name || ""));
+  const mstHuawei  = assistants.filter(m => m && /huawei/i.test(m.name || ""));
+  renderList("#mst-polyu",  mstPolyU);
+  renderList("#mst-huawei", mstHuawei);
+
+  // 4) Research Teams (optional array of strings or {name})
+  appendTextList("#research-teams", data.research_teams || []);
+}
+
+/* --- Show/Hide sections --- */
+function toggle(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle("hide");
+}
+
+/* --- Kick off --- */
+loadYAMLFile("yml/structure.yml")
+  .then(parseYAMLData)
+  .catch(err => console.error("Failed to load YAML file:", err));
