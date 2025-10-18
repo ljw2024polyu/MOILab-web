@@ -27,7 +27,7 @@ body {
 #banner .carousel-inner{
     text-align: center;
     width: 100%;
-    background: linear-gradient(to right, #dcdcdc 0%, #ffffff 40%, #ffffff 60%, #dcdcdc 100%);
+    background: linear-gradient(to right, #dcdcdc 0%, #ffffff 48%, #ffffff 52%, #dcdcdc 100%);
 }
 /*#banner .carousel-inner img{
 
@@ -44,10 +44,6 @@ body {
     display: inline-block;       /* 与 text-align:center 配合水平居中 */
 }
 
-/* 如果你用了方案 B（padding: 0 40px），可以把图片最大宽度减去左右留白： */
-#banner .carousel-inner img{
-    max-width: calc(100% - 80px); /* 40px + 40px */
-}
 
 #banner .carousel-indicators li{
     cursor: copy;
