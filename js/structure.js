@@ -2,114 +2,100 @@
 $(".header").load("components/header.html");
 $(".footer").load("components/footer.html");
 
-/* --- Fetch YAML file (async) --- */
-function loadYAMLFile(url) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
+/* Utility: escape HTML */
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
+
+/* Fetch YAML (Promise) */
+function fetchYAML(url){
+  return new Promise(function(resolve,reject){
+    var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
+    xhr.onreadystatechange = function(){
+      if (xhr.readyState === 4){
         if (xhr.status === 200) resolve(xhr.responseText);
-        else reject(xhr.statusText || "HTTP " + xhr.status);
+        else reject(new Error("HTTP "+xhr.status+" loading "+url));
       }
     };
     xhr.send();
   });
 }
 
-// --- Safe HTML escape (avoid inserting raw text) ---
-function esc(s){ return String(s||"")
-  .replace(/&/g,"&amp;").replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+/* Build one lecture card (Bootstrap) */
+function buildLectureCard(item){
+  // Required fields
+  var title   = esc(item.title);
+  var speaker = esc(item.speaker);
+  var affil   = esc(item.affiliation || "");
+  var date    = esc(item.date    || "");
+  var time    = esc(item.time    || "");
+  var venue   = esc(item.venue   || "");
+  var host    = esc(item.host    || "");
+  var abs     = esc(item.abstract || "");
 
-// Render a list of {name, link, affiliation}
-function renderList(selector, list) {
-  const el = document.querySelector(selector);
-  if (!el || !Array.isArray(list)) return;
-  list.forEach((item) => {
-    if (!item) return;
-    const name = esc(item.name || "");
-    const aff  = item.affiliation ? ` (${esc(item.affiliation)})` : "";
-    const link = (item.link || "#").trim();
+  // Optional links
+  var slides  = item.slides ? `<a href="${esc(item.slides)}" target="_blank" rel="noopener">Slides</a>` : "";
+  var video   = item.video  ? `<a href="${esc(item.video)}"  target="_blank" rel="noopener">Video</a>`  : "";
+  var poster  = item.poster ? `<img class="lecture-poster" src="${esc(item.poster)}" alt="${title} poster">` : "";
 
-    const line = document.createElement("div");
-    line.className = "line";
-    line.innerHTML = `<a href="${esc(link)}" target="_blank" rel="noopener">${name}${aff}</a>`;
-    el.appendChild(line);
-  });
-}
-
-// Append plain text items (for research team names)
-function appendTextList(selector, arr) {
-  const el = document.querySelector(selector);
-  if (!el || !Array.isArray(arr)) return;
-  arr.forEach((v) => {
-    const text = (typeof v === "string") ? v : (v && v.name) ? v.name : "";
-    if (!text) return;
-    const line = document.createElement("div");
-    line.className = "line";
-    line.textContent = text;
-    el.appendChild(line);
-  });
-}
-
-/* --- Parse YAML & render --- */
-function parseYAMLData(yamlText) {
-  const data = jsyaml.load(yamlText) || {};
-
-  // 1) Technical Committee: director & deputy
-  renderList("#tc-director", data.director || []);
-  renderList("#tc-deputy",   data.deputy   || []);
-
-  // 2) Technical Committee members (split by PolyU / Huawei via name)
-  const tcMembers = (data.member || []);
-  const tcPolyU   = tcMembers.filter(m => m && /polyu/i.test(m.name || ""));
-  const tcHuawei  = tcMembers.filter(m => m && /huawei/i.test(m.name || ""));
-  renderList("#tc-members-polyu",  tcPolyU);
-  renderList("#tc-members-huawei", tcHuawei);
-
-  // 3) Management Support Team (assistant in YAML)
-  const assistants = (data.assistant || []);
-  const mstPolyU   = assistants.filter(m => m && /polyu/i.test(m.name || ""));
-  const mstHuawei  = assistants.filter(m => m && /huawei/i.test(m.name || ""));
-  renderList("#mst-polyu",  mstPolyU);
-  renderList("#mst-huawei", mstHuawei);
-
-  // 4) Research Teams (optional array of strings or {name})
-  appendTextList("#research-teams", data.research_teams || []);
-}
-
-/* --- Show/Hide sections --- */
-function toggle(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.classList.toggle("hide");
-}
-
-/* --- Kick off --- */
-loadYAMLFile("yml/structure.yml")
-  .then(parseYAMLData)
-  .catch(err => console.error("Failed to load YAML file:", err));
-
-  function parseYAMLData(yamlText) {
-    const data = jsyaml.load(yamlText) || {};
-  
-    // helpers
-    const byAff = (arr, org) => (arr || []).filter(x => (x && (x.affiliation||'').toLowerCase() === org));
-    const render = (sel, arr) => renderList(sel, arr || []);
-  
-    // Technical Committee
-    render("#tc-director", data.director);
-    render("#tc-deputy",  data.deputy);
-  
-    render("#tc-members-polyu",  byAff(data.member, "polyu"));
-    render("#tc-members-huawei", byAff(data.member, "huawei"));
-  
-    // Management Support Team
-    render("#mst-polyu",  byAff(data.assistant, "polyu"));
-    render("#mst-huawei", byAff(data.assistant, "huawei"));
-  
-    // Research Teams
-    appendTextList("#research-teams", data.research_teams);
+  // Tags
+  var tagsHTML = "";
+  if (Array.isArray(item.tags)) {
+    tagsHTML = item.tags.map(function(t){ return `<span class="tag">${esc(t)}</span>`; }).join(" ");
   }
-  
+
+  // Meta lines
+  var metaLines = [];
+  if (affil) metaLines.push(affil);
+  if (date || time) metaLines.push([date,time].filter(Boolean).join("  ·  "));
+  if (venue) metaLines.push(venue);
+  if (host)  metaLines.push("Host: " + host);
+
+  var actions = [slides, video].filter(Boolean).join(" ");
+
+  // Card HTML
+  return `
+  <div class="col-sm-12 col-md-6 lecture-card wow fadeInUp">
+    <div class="panel panel-default">
+      ${poster ? `<div class="panel-image">${poster}</div>` : ""}
+      <div class="panel-body">
+        <h3 style="margin-top:0">${title}</h3>
+        <p><strong>${speaker}</strong></p>
+        ${metaLines.length ? `<p class="lecture-meta">${metaLines.join("<br>")}</p>` : ""}
+        ${abs ? `<p style="margin-top:10px">${abs}</p>` : ""}
+        ${tagsHTML ? `<div style="margin-top:8px">${tagsHTML}</div>` : ""}
+        ${actions ? `<div class="lecture-actions" style="margin-top:12px">${actions}</div>` : ""}
+      </div>
+    </div>
+  </div>`;
+}
+
+/* Render all lectures into the grid */
+function renderLectures(list){
+  var row = document.getElementById("lecturesRow");
+  if (!row) return;
+
+  // Optional: sort by date descending if ISO format is used (YYYY-MM-DD)
+  var sorted = (list || []).slice().sort(function(a,b){
+    var da = Date.parse(a.date || "") || 0;
+    var db = Date.parse(b.date || "") || 0;
+    return db - da;
+  });
+
+  // Build & inject
+  var html = sorted.map(buildLectureCard).join("");
+  row.innerHTML = html || `<div class="col-sm-12"><p>No lectures published yet.</p></div>`;
+}
+
+/* Entry */
+fetchYAML("yml/lectures.yml")
+  .then(function(text){ return jsyaml.load(text); })
+  .then(function(data){
+    // Expecting { lectures: [ ... ] }
+    renderLectures((data && data.lectures) || []);
+  })
+  .catch(function(err){
+    console.error(err);
+    var row = document.getElementById("lecturesRow");
+    if (row) row.innerHTML = `<div class="col-sm-12"><p>Failed to load lectures.</p></div>`;
+  });
