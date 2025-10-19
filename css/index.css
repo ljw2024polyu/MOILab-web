@@ -471,7 +471,7 @@ button{
   /* Slogan centered & larger */
 .moi-slogan{
     text-align: center;
-    font-size: 22px;      /* 桌面端字号 */
+    font-size: 32px;      /* 桌面端字号 */
     margin-top: 12px;
     margin-bottom: 0;
   }

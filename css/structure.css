@@ -96,3 +96,23 @@
     height: 100%;
 }
 
+/* Make "PolyU" / "Huawei" badges bigger */
+.org-badge{
+    font-size: 18px;        /* 原来约 14–16，可适当放大 */
+    padding: 22px 28px;     /* 原: 18px 24px -> 视觉更厚实 */
+    min-width: 180px;       /* 原: 160px -> 牌子更宽 */
+    border-radius: 18px;    /* 圆角稍大一点 */
+    vertical-align: top;    /* 与右侧 role-box 顶对齐，避免被加高后下沉 */
+  }
+  
+  /* 若想再大一档，把上面的调到 20px / 26px / 200px 即可 */
+  
+  /* 手机端保持协调（可选） */
+  @media (max-width: 768px){
+    .org-badge{
+      font-size: 16px;
+      padding: 16px 22px;
+      min-width: 150px;
+    }
+  }
+  
