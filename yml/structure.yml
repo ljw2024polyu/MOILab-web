@@ -5,67 +5,67 @@ technical_committee:
     director:
       - name: Defeng Sun
         link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
-        title: Chair Professor
+        title: 
         affiliation: AMA
     members:
       - name: Xiaojun Chen
         link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-chen-xiaojun/
-        title: Chair Professor
+        title: 
         affiliation: AMA
       - name: Xu Zhou
         link: https://www.polyu.edu.hk/lms/people/academic-staff/zhou-xu/
-        title: Professor
+        title: 
         affiliation: LMS
       - name: Yancheng Yuan
         link: https://paulyuanmath.github.io/
-        title: Assistant Professor
+        title: 
         affiliation: AMA
 
   huawei:
     deputy_director:
       - name: Sun Jie
         link: #
-        title: Professor
+        title: 
         affiliation: Huawei
     members:
       - name: Liu Junyan
         link: #
-        title: Researcher
+        title: 
         affiliation: Huawei
       - name: Sun Chumin
         link: #
-        title: Researcher
+        title: 
         affiliation: Huawei
       - name: Sun Zhaoyi
         link: #
-        title: Researcher
+        title: 
         affiliation: Huawei
 
 management_support_team:
   polyu:
     - name: Defeng Sun
       link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
-      title: Chair Professor
+      title: 
       affiliation: AMA
     - name: Yancheng Yuan
       link: https://paulyuanmath.github.io/
-      title: Assistant Professor
+      title: 
       affiliation: AMA
     - name: Li Qian
       link: #
-      title: Researcher
+      title: 
       affiliation: AMA
 
   huawei:
     - name: Zhang Fan
       link: #
-      title: Researcher
+      title: 
       affiliation: Huawei
     - name: Qian Huibin
       link: #
-      title: Researcher
+      title: 
       affiliation: Huawei
     - name: Zeng Jianshan
       link: #
-      title: Researcher
+      title: 
       affiliation: Huawei
