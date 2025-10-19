@@ -468,18 +468,22 @@ button{
     #long-text p{ font-size: 14.5px; }
   }
 
-/* slogan：与上方正文拉开距离 */
+/* slogan 与上文拉开距离，并放大、居中 */
 .container p.moi-slogan{
     text-align: center;
-    font-size: 24px;     /* 自己的字号，可改 */
-    margin-top: 32px;    /* ↑↑ 这里控制“空几行”的感觉，改大就更空 */
-    margin-bottom: 0;
-    font-style: italic;  /* 保持斜体，可删 */
-    padding: 0;          /* 取消 .container p 的左右/下内边距 */
+    font-size: 28px !important;   /* 放大：根据需要调 28~40 */
+    margin-top: 48px !important;  /* 这里决定“空几行”的感觉 */
+    margin-bottom: 0 !important;
+    padding: 0 !important;        /* 覆盖 .container p 的 padding-bottom:30px */
+    font-style: italic;           /* 保持斜体，可去掉 */
   }
   
-  /* 小屏可稍微收紧 */
+  /* 小屏再微调 */
   @media (max-width: 576px){
-    .container p.moi-slogan{ margin-top: 24px; font-size: 20px; }
+    .container p.moi-slogan{
+      font-size: 22px !important;
+      margin-top: 32px !important;
+    }
   }
+  
   
