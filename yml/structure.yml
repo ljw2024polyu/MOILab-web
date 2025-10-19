@@ -3,12 +3,12 @@
 technical_committee:
   polyu:
     director:
-      - name: Defeng Sun
+      - name: Sun Defeng 
         link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
         title: 
         affiliation: AMA
     members:
-      - name: Xiaojun Chen
+      - name: Chen Xiaojun 
         link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-chen-xiaojun/
         title: 
         affiliation: AMA
@@ -16,7 +16,7 @@ technical_committee:
         link: https://www.polyu.edu.hk/lms/people/academic-staff/zhou-xu/
         title: 
         affiliation: LMS
-      - name: Yancheng Yuan
+      - name: Yuan Yancheng 
         link: https://paulyuanmath.github.io/
         title: 
         affiliation: AMA
@@ -43,11 +43,11 @@ technical_committee:
 
 management_support_team:
   polyu:
-    - name: Defeng Sun
+    - name: Sun Defeng 
       link: https://www.polyu.edu.hk/ama/people/academic-staff/prof-sun-defeng/
       title: 
       affiliation: AMA
-    - name: Yancheng Yuan
+    - name: Yuan Yancheng 
       link: https://paulyuanmath.github.io/
       title: 
       affiliation: AMA
